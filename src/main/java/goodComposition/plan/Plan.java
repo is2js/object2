@@ -1,5 +1,7 @@
-package goodComposition;
+package goodComposition.plan;
 
+import goodComposition.Call;
+import goodComposition.Money;
 import java.util.HashSet;
 import java.util.Set;
 
