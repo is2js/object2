@@ -8,7 +8,7 @@ public class TexCalculator extends Calculator {
 
     private Double ratio;
 
-    public TexCalculator(final Calculator next, final Double ratio) {
+    public TexCalculator(final Double ratio) {
         this.ratio = ratio;
     }
 
