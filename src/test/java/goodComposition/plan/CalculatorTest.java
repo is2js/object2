@@ -14,19 +14,17 @@ class CalculatorTest {
     void setNext() {
         final Plan plan = new Plan();
 
-        final Calculator calculator = new PricePerTimeCalculator(Money.of(1000D), Duration.ofSeconds(60))
-            .setNext(new AmountDiscountCalculator(Money.of(2000D))
-                .setNext(new TexCalculator(0.1)));
+        final Calculator calculator = new Calculator(
+            new PricePerTimeCalc(Money.of(1000D), Duration.ofSeconds(60)))
+            .setNext(new AmountDiscountCalc(Money.of(2000D)))
+            .setNext(new TexCalc(0.1));
 
         plan.setCalculator(
             calculator
         );
 
-        final Calculator firstCalculator = plan.getCalculator();
+        final Calculator actual = plan.getCalculator();
 
-        assertThat(firstCalculator).extracting("next")
-            .isInstanceOf(AmountDiscountCalculator.class)
-            .extracting("next")
-            .isInstanceOf(TexCalculator.class);
+        assertThat(actual.getCalcs()).hasSize(3);
     }
 }

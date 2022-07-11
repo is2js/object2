@@ -2,22 +2,31 @@ package goodComposition.plan;
 
 import goodComposition.Call;
 import goodComposition.Money;
+import java.util.HashSet;
 import java.util.Set;
 
-public abstract class Calculator {
+public class Calculator {
 
-    private Calculator next;
+    private Set<Calc> calcs = new HashSet<>();
 
-    public final Calculator setNext(final Calculator next) {
-        this.next = next;
+    public Calculator(final Calc calc) {
+        this.calcs.add(calc);
+    }
+
+    public Calculator setNext(final Calc calc) {
+        this.calcs.add(calc);
         return this;
     }
 
     public final Money calculateCallFee(Money result, final Set<Call> calls) {
-        result = calculateFee(result, calls);
+        for (final Calc calc : calcs) {
+            result = calc.calculateFee(result, calls);
+        }
 
-        return next == null ? result : next.calculateCallFee(result, calls);
+        return result;
     }
 
-    protected abstract Money calculateFee(Money result, Set<Call> calls);
+    public Set<Calc> getCalcs() {
+        return calcs;
+    }
 }

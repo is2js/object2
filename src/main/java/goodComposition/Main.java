@@ -1,9 +1,10 @@
 package goodComposition;
 
-import goodComposition.plan.AmountDiscountCalculator;
+import goodComposition.plan.AmountDiscountCalc;
+import goodComposition.plan.Calculator;
 import goodComposition.plan.Plan;
-import goodComposition.plan.PricePerTimeCalculator;
-import goodComposition.plan.TexCalculator;
+import goodComposition.plan.PricePerTimeCalc;
+import goodComposition.plan.TexCalc;
 import java.time.Duration;
 
 public class Main {
@@ -12,10 +13,9 @@ public class Main {
         final Plan plan = new Plan();
 
         plan.setCalculator(
-            new PricePerTimeCalculator(Money.of(1000D), Duration.ofSeconds(60))
-                .setNext(new AmountDiscountCalculator(Money.of(1000D))
-                    .setNext(new TexCalculator(0.1))
-                )
+            new Calculator(new PricePerTimeCalc(Money.of(1000D), Duration.ofSeconds(60)))
+                .setNext(new AmountDiscountCalc(Money.of(1000D)))
+                .setNext(new TexCalc(0.1))
         );
     }
 
