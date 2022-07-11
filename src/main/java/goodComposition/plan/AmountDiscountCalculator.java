@@ -4,19 +4,17 @@ import goodComposition.Call;
 import goodComposition.Money;
 import java.util.Set;
 
-public class AmountDiscountCalculator implements Calculator {
+public class AmountDiscountCalculator extends Calculator {
 
     private Money amount;
-    private Calculator next;
 
-    public AmountDiscountCalculator(final Calculator next, final Money amount) {
+    public AmountDiscountCalculator(final Money amount) {
         this.amount = amount;
-        this.next = next;
     }
 
     @Override
-    public Money calculateCallFee(Money result, final Set<Call> calls) {
-        result = result.minus(amount);
-        return next == null ? result : next.calculateCallFee(result, calls);
+    protected Money calculateFee(final Money result, final Set<Call> calls) {
+        return result.minus(amount);
     }
+
 }
