@@ -8,8 +8,9 @@ public abstract class Calculator {
 
     private Calculator next;
 
-    public final void setNext(final Calculator next) {
+    public final Calculator setNext(final Calculator next) {
         this.next = next;
+        return this;
     }
 
     public final Money calculateCallFee(Money result, final Set<Call> calls) {

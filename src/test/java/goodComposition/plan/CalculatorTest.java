@@ -25,6 +25,8 @@ class CalculatorTest {
         final Calculator firstCalculator = plan.getCalculator();
 
         assertThat(firstCalculator).extracting("next")
-            .isInstanceOf(AmountDiscountCalculator.class);
+            .isInstanceOf(AmountDiscountCalculator.class)
+            .extracting("next")
+            .isInstanceOf(TexCalculator.class);
     }
 }

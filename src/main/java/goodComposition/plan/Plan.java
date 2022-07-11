@@ -22,4 +22,7 @@ public class Plan {
         return calculator.calculateCallFee(Money.ZERO, calls);
     }
 
+    public Calculator getCalculator() {
+        return calculator;
+    }
 }
