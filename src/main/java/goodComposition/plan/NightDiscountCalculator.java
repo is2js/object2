@@ -7,10 +7,22 @@ import java.time.LocalTime;
 import java.util.Set;
 
 public class NightDiscountCalculator implements Calculator {
+
+    private final Calculator next;
     private Money nightPrice; // 통화시작시간이 밤일 때  기준시간당 가격
     private Money dayPrice;  // 통화시작시간이 낮일 때 기준시간당 가격
     private LocalTime nightTime; // 밤의 기준시각
     private Duration second; // 몇초당 요금이 부과될지
+
+    public NightDiscountCalculator(final Calculator next, final Money dayPrice, final Money nightPrice,
+                                   final LocalTime nightTime,
+                                   final Duration second) {
+        this.next = next;
+        this.nightPrice = nightPrice;
+        this.dayPrice = dayPrice;
+        this.nightTime = nightTime;
+        this.second = second;
+    }
 
     @Override
     public Money calculateCallFee(Money result, final Set<Call> calls) {
@@ -22,6 +34,6 @@ public class NightDiscountCalculator implements Calculator {
             result = result.plus(price.times(call.getDuration().getSeconds() / second.getSeconds()));
         }
 
-        return result;
+        return next == null ? result : next.calculateCallFee(result, calls);
     }
 }

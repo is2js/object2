@@ -1,19 +1,25 @@
 package goodComposition;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import goodComposition.plan.AmountDiscountCalculator;
+import goodComposition.plan.Plan;
+import goodComposition.plan.PricePerTimeCalculator;
+import goodComposition.plan.TexCalculator;
+import java.time.Duration;
 
 public class Main {
     public static void main(String[] args) {
 
-        final Pattern pattern = Pattern.compile("file_check_\\d{1,2}");
-        final Matcher matcher = pattern.matcher("file_check_12 dddd");
-        if (!matcher.find()) {
-            System.out.println("패턴이 발견되지 않았습니다.");
-            return;
-        }
-        final String group = matcher.group();
-        System.out.println(group);
+        final Plan plan = new Plan();
+        plan.setCalculator(
+            new PricePerTimeCalculator(
+                new AmountDiscountCalculator(
+                    new TexCalculator(null, 0.01),
+                    Money.of(1000.0)
+                ),
+                Money.of(18.0),
+                Duration.ofSeconds(60)
+            )
+        );
     }
 
 }

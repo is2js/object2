@@ -8,7 +8,7 @@ public class Money {
         this.amount = amount;
     }
 
-    private static Money of(final Double amount) {
+    public static Money of(final Double amount) {
         return new Money(amount);
     }
 
