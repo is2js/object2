@@ -27,11 +27,7 @@ public class Plan {
     }
 
     public final Money calculateFee() {
-        final Money result = calculator.calculateCallFee(Money.ZERO, calls);
-        if (calls.size() > 0 && (result.equals(Money.ZERO) || result.isLessThan(Money.ZERO))) {
-            throw new RuntimeException("calculate error");
-        }
-        return result;
+        return calculator.calculateCallFee(Money.ZERO, calls);
     }
 
     public Calculator getCalculator() {
