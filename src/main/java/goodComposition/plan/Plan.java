@@ -21,7 +21,6 @@ public class Plan {
         if (calculator == null) {
             throw new IllegalArgumentException("calculator is null");
         }
-        calculator.check();
 
         this.calculator = calculator;
     }
