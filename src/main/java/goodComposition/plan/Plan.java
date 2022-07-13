@@ -10,11 +10,17 @@ public class Plan {
     private final Set<Call> calls = new HashSet<>();
     private Calculator calculator = new Calculator();
 
-    public final void addCall(Call call){
+    public final void addCall(Call call) {
+        if (call == null) {
+            throw new IllegalArgumentException("call is null");
+        }
         calls.add(call);
     }
 
     public void setCalculator(final Calculator calculator) {
+        if (calculator == null) {
+            throw new IllegalArgumentException("calculator is null");
+        }
         this.calculator = calculator;
     }
 
