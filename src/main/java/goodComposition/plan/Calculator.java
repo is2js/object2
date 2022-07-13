@@ -21,6 +21,12 @@ public class Calculator {
         return this;
     }
 
+    void check() {
+        if (calcs.isEmpty()) {
+            throw new IllegalArgumentException("calculator is empty");
+        }
+    }
+
     public final Money calculateCallFee(Money result, final Set<Call> calls) {
         for (final Calc calc : calcs) {
             result = calc.calculateFee(result, calls);
@@ -31,9 +37,5 @@ public class Calculator {
 
     public Set<Calc> getCalcs() {
         return calcs;
-    }
-
-    public boolean isEmpty() {
-        return calcs.isEmpty();
     }
 }

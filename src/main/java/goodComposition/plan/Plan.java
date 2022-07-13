@@ -21,9 +21,7 @@ public class Plan {
         if (calculator == null) {
             throw new IllegalArgumentException("calculator is null");
         }
-        if (calculator.isEmpty()) {
-            throw new IllegalArgumentException("calculator is empty");
-        }
+        calculator.check();
 
         this.calculator = calculator;
     }
