@@ -32,4 +32,8 @@ public class Calculator {
     public Set<Calc> getCalcs() {
         return calcs;
     }
+
+    public boolean isEmpty() {
+        return calcs.isEmpty();
+    }
 }
