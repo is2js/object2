@@ -8,7 +8,7 @@ import java.util.Set;
 public class Plan {
 
     private final Set<Call> calls = new HashSet<>();
-    private Calculator calculator;
+    private Calculator calculator = new Calculator();
 
     public final void addCall(Call call){
         calls.add(call);

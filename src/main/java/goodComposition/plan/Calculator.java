@@ -9,6 +9,9 @@ public class Calculator {
 
     private Set<Calc> calcs = new HashSet<>();
 
+    public Calculator() {
+    }
+
     public Calculator(final Calc calc) {
         this.calcs.add(calc);
     }
