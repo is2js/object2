@@ -28,6 +28,10 @@ public class Money {
         return this.amount >= amount.amount;
     }
 
+    public boolean isLessThan(final Money amount) {
+        return this.amount < 0.0;
+    }
+
     public Money times(Long l) {
         return new Money(this.amount * l);
     }
