@@ -27,7 +27,7 @@ public class Plan {
     }
 
     public final Money calculateFee() {
-        return calculator.calculateCallFee(Money.ZERO, calls);
+        return calls.isEmpty() ? Money.ZERO : calculator.calculateCallFee(Money.ZERO, calls);
     }
 
     public Calculator getCalculator() {

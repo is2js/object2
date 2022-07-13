@@ -32,7 +32,7 @@ public class Calculator {
             result = calc.calculateFee(result, calls);
         }
 
-        if (calls.size() > 0 && (result.equals(Money.ZERO) || result.isLessThan(Money.ZERO))) {
+        if (result.equals(Money.ZERO) || result.isLessThan(Money.ZERO)) {
             throw new RuntimeException("calculate error");
         }
 
