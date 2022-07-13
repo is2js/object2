@@ -13,10 +13,16 @@ public class Calculator {
     }
 
     public Calculator(final Calc calc) {
+        if (calc == null) {
+            throw new IllegalArgumentException("calc is null");
+        }
         this.calcs.add(calc);
     }
 
     public Calculator setNext(final Calc calc) {
+        if (calc == null) {
+            throw new IllegalArgumentException("calc is null");
+        }
         this.calcs.add(calc);
         return this;
     }
