@@ -4,6 +4,7 @@ import goodComposition.DateTimeInterval;
 import goodComposition.Money;
 import java.time.DayOfWeek;
 import java.time.Duration;
+import java.util.List;
 import java.util.Set;
 
 public class DayPrice {
@@ -20,7 +21,7 @@ public class DayPrice {
         this.dayOfWeeks = dayOfWeeks;
     }
 
-    Money calculate(final DateTimeInterval[] intervals) {
+    Money calculate(final List<DateTimeInterval> intervals) {
         Money sum = Money.ZERO;
 
         //interval한건 한건이, Set에 들어가는 요일에 걸려있는지 확인 후
