@@ -10,11 +10,18 @@ public class TexCalc extends Calc {
     private Double ratio;
 
     public TexCalc(final Double ratio) {
+        if (ratio == null || ratio < 0D) {
+            throw new IllegalArgumentException("invalid ratio");
+        }
         this.ratio = ratio;
     }
 
     @Override
     protected Money calculate(final Money result, final Set<Call> calls) {
-        return result.minus(result.multi(ratio));
+        final Money tex = result.multi(ratio);
+        if (tex.isgreaterThan(result) || tex.equals(result)) {
+            throw new RuntimeException("calculate error");
+        }
+        return result.minus(tex);
     }
 }

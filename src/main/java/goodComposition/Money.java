@@ -24,7 +24,7 @@ public class Money {
         return new Money(this.amount + amount.amount);
     }
 
-    public boolean greaterThen(Money amount) {
+    public boolean isgreaterThan(Money amount) {
         return this.amount >= amount.amount;
     }
 

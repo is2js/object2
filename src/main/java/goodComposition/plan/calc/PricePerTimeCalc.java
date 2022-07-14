@@ -25,9 +25,21 @@ public class PricePerTimeCalc extends Calc {
 
     @Override
     protected Money calculate(Money result, final Set<Call> calls) {
+        Money sum = Money.ZERO;
         for (final Call call : calls) {
-            result = result.plus(price.times(call.getDuration().getSeconds() / second.getSeconds()));
+            final Money tempResult = price.times(call.getDuration().getSeconds() / second.getSeconds());
+
+            if (tempResult.isLessThanOrEqualTo(Money.ZERO)) {
+                throw new RuntimeException("calculate error");
+            }
+
+            sum = sum.plus(tempResult);
         }
-        return result;
+
+        if (sum.isLessThanOrEqualTo(Money.ZERO)) {
+            throw new RuntimeException("calculate error");
+        }
+
+        return result.plus(sum);
     }
 }
