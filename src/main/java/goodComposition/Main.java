@@ -1,10 +1,10 @@
 package goodComposition;
 
-import goodComposition.plan.AmountDiscountCalc;
+import goodComposition.plan.calc.AmountDiscountCalc;
 import goodComposition.plan.Calculator;
 import goodComposition.plan.Plan;
-import goodComposition.plan.PricePerTimeCalc;
-import goodComposition.plan.TexCalc;
+import goodComposition.plan.calc.PricePerTimeCalc;
+import goodComposition.plan.calc.TexCalc;
 import java.time.Duration;
 
 public class Main {

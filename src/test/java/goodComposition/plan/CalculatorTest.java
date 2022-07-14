@@ -3,6 +3,9 @@ package goodComposition.plan;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import goodComposition.Money;
+import goodComposition.plan.calc.AmountDiscountCalc;
+import goodComposition.plan.calc.PricePerTimeCalc;
+import goodComposition.plan.calc.TexCalc;
 import java.time.Duration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,8 @@
-package goodComposition.plan;
+package goodComposition.plan.calc;
 
 import goodComposition.Call;
 import goodComposition.Money;
+import goodComposition.plan.Calc;
 import java.util.Set;
 
 public class TexCalc extends Calc {
