@@ -27,7 +27,7 @@ public class Calculator {
         return this;
     }
 
-    public final Money calculateCallFee(Money result, final Set<Call> calls) {
+    final Money calculateCallFee(Money result, final Set<Call> calls) {
         check();
 
         for (final Calc calc : calcs) {

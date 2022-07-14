@@ -4,7 +4,7 @@ import goodComposition.Call;
 import goodComposition.Money;
 import java.util.Set;
 
-public class TexCalc implements Calc {
+public class TexCalc extends Calc {
 
     private Double ratio;
 
@@ -13,7 +13,7 @@ public class TexCalc implements Calc {
     }
 
     @Override
-    public Money calculateFee(final Money result, final Set<Call> calls) {
+    protected Money calculate(final Money result, final Set<Call> calls) {
         return result.minus(result.multi(ratio));
     }
 }

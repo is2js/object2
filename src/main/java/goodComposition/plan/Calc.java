@@ -4,7 +4,11 @@ import goodComposition.Call;
 import goodComposition.Money;
 import java.util.Set;
 
-public interface Calc {
+public abstract class Calc {
 
-    Money calculateFee(Money result, Set<Call> calls);
+    final Money calculateFee(final Money result, final Set<Call> calls) {
+        return calculate(result, calls);
+    }
+
+    protected abstract Money calculate(Money result, final Set<Call> calls);
 }

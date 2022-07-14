@@ -4,7 +4,7 @@ import goodComposition.Call;
 import goodComposition.Money;
 import java.util.Set;
 
-public class AmountDiscountCalc implements Calc {
+public class AmountDiscountCalc extends Calc {
 
     private Money amount;
 
@@ -13,7 +13,7 @@ public class AmountDiscountCalc implements Calc {
     }
 
     @Override
-    public Money calculateFee(final Money result, final Set<Call> calls) {
+    protected Money calculate(final Money result, final Set<Call> calls) {
         return result.minus(amount);
     }
 
