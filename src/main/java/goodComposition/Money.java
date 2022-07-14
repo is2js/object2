@@ -24,7 +24,7 @@ public class Money {
         return new Money(this.amount + amount.amount);
     }
 
-    public boolean isgreaterThan(Money amount) {
+    public boolean isGreaterThan(Money amount) {
         return this.amount >= amount.amount;
     }
 
@@ -36,7 +36,11 @@ public class Money {
         return this.amount <= 0.0;
     }
 
-    public Money times(Long l) {
-        return new Money(this.amount * l);
+    public Money times(double multiple) {
+        return new Money(this.amount * multiple);
+    }
+
+    public Double getAmount() {
+        return amount;
     }
 }

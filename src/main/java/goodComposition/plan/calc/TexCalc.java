@@ -19,7 +19,7 @@ public class TexCalc extends Calc {
     @Override
     protected Money calculate(final Money result, final Set<Call> calls) {
         final Money tex = result.multi(ratio);
-        if (tex.isgreaterThan(result) || tex.equals(result)) {
+        if (tex.isGreaterThan(result) || tex.equals(result)) {
             throw new RuntimeException("calculate error");
         }
         return result.minus(tex);

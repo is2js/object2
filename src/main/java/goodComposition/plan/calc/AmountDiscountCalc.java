@@ -18,7 +18,7 @@ public class AmountDiscountCalc extends Calc {
 
     @Override
     protected Money calculate(final Money result, final Set<Call> calls) {
-        if (amount.isgreaterThan(result) || amount.equals(result)) {
+        if (amount.isGreaterThan(result) || amount.equals(result)) {
             throw new RuntimeException("calculate error");
         }
         return result.minus(amount);
