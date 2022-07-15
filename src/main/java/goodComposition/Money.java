@@ -1,5 +1,7 @@
 package goodComposition;
 
+import java.util.Objects;
+
 public class Money {
     public static final Money ZERO = Money.of(0.0);
     private final Double amount;
@@ -42,5 +44,22 @@ public class Money {
 
     public Double getAmount() {
         return amount;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Money money = (Money) o;
+        return Objects.equals(getAmount(), money.getAmount());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAmount());
     }
 }

@@ -40,4 +40,12 @@ public class DurationPriceRule {
         // 몇초당 요금할인이 아니라 1초당 요금할인인가보다. 초duration을 따로 안가지고 있고 price만 있으니 price만 곱한다.
         return price.times(upperbound.minus(prev.to).getSeconds());
     }
+
+    public Duration getTo() {
+        return to;
+    }
+
+    public DurationPriceRule getPrev() {
+        return prev;
+    }
 }
