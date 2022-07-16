@@ -63,13 +63,14 @@ public class DurationPriceCalc extends Calc {
                 // 계산로직
                 final Money tempResult = target.calculate(call.getDuration());
                 sum = sum.plus(tempResult);
-                if (sum.isLessThanOrEqualTo(Money.ZERO)) {
-                    throw new RuntimeException("calculate error");
-                }
+                // 개별구간 처리시, 자기 구간아니면, ZERO를 반환하므로, 0원 postcondition은 넣으면 안된다.
+//                if (sum.isLessThanOrEqualTo(Money.ZERO)) {
+//                    throw new RuntimeException("calculate error");
+//                }
                 // 반복문의 처리자를 prev를 꺼내서 업데이트해준다.
                 target = target.getPrev();
                 // 반복조건은, 꺼낸 prev인 target이 null(이면 현재 최초객체 -> 특이점객체는 연산안한다) 아닐 때까지
-            } while (target != null);
+            } while (target.getPrev() != null);
         }
 
         return result.plus(sum);
