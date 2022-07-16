@@ -29,4 +29,12 @@ public class SectionPriceRule {
 
         return money.times(targetDuration.getSeconds());
     }
+
+    public Duration getTo() {
+        return to;
+    }
+
+    public SectionPriceRule getPrev() {
+        return prev;
+    }
 }
