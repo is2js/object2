@@ -12,9 +12,6 @@ import java.util.Set;
 
 public class TimeOfDayCalc extends Calc {
 
-    private Money basePrice;
-    private Duration baseDuration;
-
     private List<LocalTime> starts = new ArrayList<>();
     private List<LocalTime> ends = new ArrayList<>();
     private List<Duration> durations = new ArrayList<>(); // 몇초마다 요금을 부여할 것인지
@@ -25,8 +22,6 @@ public class TimeOfDayCalc extends Calc {
                          final List<LocalTime> ends,
                          final List<Duration> durations,
                          final List<Money> prices) {
-        this.basePrice = basePrice;
-        this.baseDuration = baseDuration;
         this.starts = starts;
         this.ends = ends;
         this.durations = durations;
@@ -52,12 +47,12 @@ public class TimeOfDayCalc extends Calc {
                             / (double) durations.get(loop).getSeconds());
 
                     System.out.println("sum "+ loop + " => " + tempResult.getAmount());
-
                     if (tempResult.isLessThanOrEqualTo(Money.ZERO)) {
                         throw new RuntimeException("calculate error");
                     }
 
-                    sum.plus(tempResult);
+                    // 업데이트후, 누적시 값객체 재할당 빠짐.
+                    sum = sum.plus(tempResult);
                 }
             }
         }
