@@ -23,6 +23,22 @@ public class SectionPriceCalc {
         rule = new SectionPriceRule(to, price, rule);
     }
 
+    public void addMiddleRule(final Duration to, final Money price) {
+        SectionPriceRule targetRule = rule;
+        while (targetRule.getPrev() != null) {
+
+            final Duration upperBound = targetRule.getTo();
+            final Duration lowerBound = targetRule.getPrev().getTo();
+            if (to.compareTo(upperBound) < 0 && to.compareTo(lowerBound) > 0) {
+                final SectionPriceRule middleRule = new SectionPriceRule(to, price, targetRule.getPrev());
+                targetRule.setPrev(middleRule);
+                break;
+            }
+
+            targetRule = targetRule.getPrev();
+        }
+    }
+
 
     public Money calculate(final Money result, final Duration duration) {
         // 누적 계산 후 반환할 시, 바로 context에 업데이트하지말고,

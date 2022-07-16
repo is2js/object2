@@ -25,6 +25,7 @@ public class Main {
         sectionPriceCalc.addRule(Duration.ofMinutes(5), Money.of(30D));
         sectionPriceCalc.addRule(Duration.ofHours(9999), Money.of(50D));
 
+
         // 총 이용시간을 4분이라고 주면
         // 0~30 : 10 x 30
         // 30~1분: 20 x 30      = 900
@@ -40,6 +41,17 @@ public class Main {
             .minus(sectionPriceCalc.calculate(Money.ZERO, Duration.ofMinutes(1)));
 
         System.out.println("betweenOneAndTwoMinutes = " + betweenOneAndTwoMinutes);
+
+
+        // 0~30초: 초당 10원
+        // 30~60초(30초~1분): 20원(기본)
+        // 1분~5분: 30원 -> 1~4분 : 25원, 4분~5분:30원 * 중간에 처리구간 추가 *
+        // 5분~9999시간: 50원
+        sectionPriceCalc.addMiddleRule(Duration.ofMinutes(4), Money.of(25D));
+
+        final Money threeToFour = sectionPriceCalc.calculate(Money.ZERO, Duration.ofMinutes(4))
+            .minus(sectionPriceCalc.calculate(Money.ZERO, Duration.ofMinutes(3)));
+        System.out.println("threeToFour = " + threeToFour); // 3~4분은 : 60* 25원 = 1500원
 
 
     }

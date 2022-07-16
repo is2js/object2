@@ -7,7 +7,7 @@ public class SectionPriceRule {
 
     private final Duration to;
     private final Money money;
-    private final SectionPriceRule prev;
+    private SectionPriceRule prev;
 
     public SectionPriceRule(final Duration to, final Money money, final SectionPriceRule prev) {
         this.to = to;
@@ -36,5 +36,9 @@ public class SectionPriceRule {
 
     public SectionPriceRule getPrev() {
         return prev;
+    }
+
+    public void setPrev(final SectionPriceRule rule) {
+        this.prev = rule;
     }
 }
