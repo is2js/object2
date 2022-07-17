@@ -1,4 +1,4 @@
-package practice_decorator;
+package practice_prev_deco_for_section;
 
 import goodComposition.Money;
 import java.time.Duration;
