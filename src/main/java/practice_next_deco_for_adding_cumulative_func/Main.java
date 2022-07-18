@@ -16,6 +16,16 @@ public class Main {
         // -> next는 나를 소유한 class에서 나를 받을 때, 이미 next필드에 다음 것이 저장된 완성된 [시작 데코객체]만 가진다.
         //    -> 이미 next를 채울만큼 채운 것만 받으니, final이다.
         //    -> 밖에서 체이닝 다끝내고 완성해놓고, 주입받는다.
+        AbstractCalc currentCalc = new BaseCalc();
+        AbstractCalc additionalCalc = new AdditionalCalc(Money.of(200D));
+        currentCalc = currentCalc.setNext(
+            additionalCalc
+        );
+        additionalCalc = additionalCalc.setNext(
+            new AdditionalCalc(Money.of(200D))
+        );
+        System.out.println("new Calculator(currentCalc).calculate() = " + new Calculator(currentCalc).calculate());
+
         final Calculator calculator = new Calculator(
             new BaseCalc().setNext(
                     new AdditionalCalc(Money.of(200D)).setNext(
