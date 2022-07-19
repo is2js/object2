@@ -29,7 +29,8 @@ public class Main {
         final Calculator calculator = new Calculator(
             new BaseCalc().setNext(
                     new AdditionalCalc(Money.of(200D)).setNext(
-                        null)));
+                        null))
+        );
 
         final Money result = calculator.calculate();
         //기본 500원에 추가요금 200원
