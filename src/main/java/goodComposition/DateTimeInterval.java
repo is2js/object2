@@ -91,8 +91,20 @@ public class DateTimeInterval {
         return Arrays.asList(this);
     }
 
+    public boolean isMiddleDuration() {
+        return from.toLocalTime().isAfter(LocalTime.of(0, 0, 0));
+    }
+
     public LocalDateTime getFrom() {
         return from;
+    }
+
+    public Duration getLargerDuration() {
+        return Duration.between(LocalTime.of(0, 0, 0), to.toLocalTime());
+    }
+
+    public Duration getSmallerDuration() {
+        return Duration.between(LocalTime.of(0, 0, 0), from.toLocalTime());
     }
 
     public LocalDateTime getTo() {

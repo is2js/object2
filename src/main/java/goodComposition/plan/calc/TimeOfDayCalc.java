@@ -17,6 +17,31 @@ public class TimeOfDayCalc extends Calc {
     private List<Duration> durations = new ArrayList<>(); // 몇초마다 요금을 부여할 것인지
     private List<Money> prices = new ArrayList<>(); // 초당 요금
 
+    //1. 하루의 시간대구간을 미리쪼개놓고, 전체 구간을 받아, 개별구간마다 처리해줄 preve데코객체
+    //   - rule을 만든다. 1개만 가지면 된다. start는 없이 end(처리할 구간) + prev + 나머지 구간별 처리에 필요한 정보 2개만 필요하다
+    //   - 같은형의 prev는 맨 마지막 인자로 주고, 내가 처리할 구간의 끝은 그 직전에 주자.
+    //   - Null객체로 이루어진 시작특이점 객체를 미리 소유하고 있는다.
+    private TimeOfDayRule rule = new TimeOfDayRule(
+        Duration.ZERO,       // 개별구간마다 몇초당 요금부과할지 단위시간 (개별구간에서 나눠줄 값)
+        Money.ZERO,          // 단위시간당 부과할 금액
+        LocalTime.of(0, 0, 0), // 내가 처리할 구간(to)
+        null                 // prev
+    );
+
+    public TimeOfDayCalc() {
+    }
+
+    public TimeOfDayCalc addRule(final Duration duration, final Money price, final LocalTime to) {
+        //다음구간의 구간 끝(to)은  rule(예비prev)의 구간끝보다 길어야한다.
+        if (rule.getTo().compareTo(to) >= 0) {
+            throw new IllegalArgumentException("invalid to");
+        }
+        // duration, price가 NULL객체 하한객체가 아님 검사는 생략한다.
+        rule = new TimeOfDayRule(duration, price, to, rule);
+
+        return this;
+    }
+
     public TimeOfDayCalc(final Money basePrice, final Duration baseDuration,
                          final List<LocalTime> starts,
                          final List<LocalTime> ends,
@@ -28,38 +53,52 @@ public class TimeOfDayCalc extends Calc {
         this.prices = prices;
     }
 
+
     @Override
-    protected Money calculate(Money result, final Set<Call> calls) {
+    protected Money calculate(final Money result, final Set<Call> calls) {
         Money sum = Money.ZERO;
         for (final Call call : calls) {
-            //1. Call속의 데이터객체에서 날짜별 interval을 가져온다.
             for (final DateTimeInterval interval : call.splitByDay()) {
-                //2. interval은 1일에 대한 시간구간이며
-                //   미리 하루를 start ~ end구간으로 짤라놓았으니, 짤라놓은 구간들을 돌면서
-                //   겹치는 구간에 대해서, 해당구간별 amount를 계산해 누적한다.
-                //  -> 시작vs시작 ~ 끝vs끝을 더 안쪽(좁은쪽)만 골라내면,
-                //     겹칠 경우, 교집합의 걸리는 구간만 구할 수 있다.
-                //     s1--[ss1]===[e3]= = =ee5
-                //  -> error)안겹치는 구간인데, 더안쪽만 골라내면, 안겹치는 크로스구간이 구간으로 잡힌다.
-                for (int loop = 0; loop < starts.size(); loop++) {
-                    final Money tempResult = prices.get(loop)
-                        .times(Duration.between(from(interval, starts.get(loop)), to(interval, ends.get(loop))).getSeconds()
-                            / (double) durations.get(loop).getSeconds());
+                //1) 처리할 구간을 받는다.(하루 0~24시안에서 localdatetime의 from + to 사이로 만든 객체)
 
-                    System.out.println("sum "+ loop + " => " + tempResult.getAmount());
-                    if (tempResult.isLessThanOrEqualTo(Money.ZERO)) {
-                        throw new RuntimeException("calculate error");
-                    }
+                //2) 데코객체들은 반복문으로 돌아가며, 자기구간만 처리하는데,
+                //   다음타자를 field로 들고 있는 특성상, do-while문으로 나 처리후 -> 내필드 속 다음타자로 바꾸고 -> 검사한다.
+                //   -> 그러려면, 나 자신도 업데이트 되어야하기 때문에, 초기값을 변수로 빼놔야한다.
+                TimeOfDayRule targetRule = rule;
 
-                    // 업데이트후, 누적시 값객체 재할당 빠짐.
+                do {
+                    //3) 개별 prev데코객체는, 전체 처리할 구간을 인자로 받아서, 자기분량만 처리하고 반환해준다.
+                    //   localdatetiem from + to로 Duration.between을 이용하여, 처리할 구간을 구간객체로 반환받는다.
+                    //   -> 구간의 비교는 start가 없이 0~끝까지의 구간만 받으면 된다.
+                    //   -> start가 0인 구간 비교 -> 끝비교...?
+                    //처리해야할 구간이 0부터 시작안하는 경우? 첫날 [오후8시부터~ 12시], 2,3,4 마지막날 0시~4시
+                    // -> 첫날의 경우, 0부터 시작하는 구간이 아니므로 처리를 해줘야한다
+                    // --> a~b -> (0~b 구간처리) - (a~b 구간처리)를
+                    Money tempResult = interval.isMiddleDuration()      // 처리해야할 구간이 0부터 시작이 아니라면, 0부터시작하는 구간2개로 나누고 2번 계산해서 차이
+                        ? calculateMiddleDuration(interval, targetRule)
+                        : targetRule.calculate(interval.duration());
+
+                    System.out.println("tempResult = " + tempResult);
+
+                    //tempResult검사
                     sum = sum.plus(tempResult);
-                }
+
+                    //4) 다음타자로 업데이트한다.
+                    targetRule = targetRule.getPrev();
+
+                    //5) 다음타자가 null로 잡힌, 연산없는 시작특이점객체에 도달하면, 종료한다.
+                } while (targetRule.getPrev() != null);
             }
         }
         if (sum.isLessThanOrEqualTo(Money.ZERO)) {
             throw new RuntimeException("calculate error");
         }
         return result.plus(sum);
+    }
+
+    private Money calculateMiddleDuration(final DateTimeInterval interval, final TimeOfDayRule targetRule) {
+        return targetRule.calculate(interval.getLargerDuration())
+            .minus(targetRule.calculate(interval.getSmallerDuration()));
     }
 
     private LocalTime from(final DateTimeInterval interval, final LocalTime localTime) {
@@ -71,4 +110,5 @@ public class TimeOfDayCalc extends Calc {
         return interval.getTo().toLocalTime().isAfter(localTime)
             ? localTime : interval.getTo().toLocalTime();
     }
+
 }
