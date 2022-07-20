@@ -6,16 +6,9 @@ import goodComposition.Money;
 import goodComposition.plan.Calc;
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class TimeOfDayCalc extends Calc {
-
-    private List<LocalTime> starts = new ArrayList<>();
-    private List<LocalTime> ends = new ArrayList<>();
-    private List<Duration> durations = new ArrayList<>(); // 몇초마다 요금을 부여할 것인지
-    private List<Money> prices = new ArrayList<>(); // 초당 요금
 
     //1. 하루의 시간대구간을 미리쪼개놓고, 전체 구간을 받아, 개별구간마다 처리해줄 preve데코객체
     //   - rule을 만든다. 1개만 가지면 된다. start는 없이 end(처리할 구간) + prev + 나머지 구간별 처리에 필요한 정보 2개만 필요하다
@@ -41,18 +34,6 @@ public class TimeOfDayCalc extends Calc {
 
         return this;
     }
-
-    public TimeOfDayCalc(final Money basePrice, final Duration baseDuration,
-                         final List<LocalTime> starts,
-                         final List<LocalTime> ends,
-                         final List<Duration> durations,
-                         final List<Money> prices) {
-        this.starts = starts;
-        this.ends = ends;
-        this.durations = durations;
-        this.prices = prices;
-    }
-
 
     @Override
     protected Money calculate(final Money result, final Set<Call> calls) {
@@ -110,5 +91,4 @@ public class TimeOfDayCalc extends Calc {
         return interval.getTo().toLocalTime().isAfter(localTime)
             ? localTime : interval.getTo().toLocalTime();
     }
-
 }
