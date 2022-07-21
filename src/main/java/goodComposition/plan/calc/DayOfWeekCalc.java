@@ -4,36 +4,34 @@ import goodComposition.Call;
 import goodComposition.DateTimeInterval;
 import goodComposition.Money;
 import goodComposition.plan.Calc;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class DayOfWeekCalc extends Calc {
 
-    private final Set<DayPrice> prices = new HashSet<>();
+    private final Set<DayOfWeekRule> rules;
+
+    public DayOfWeekCalc(final Set<DayOfWeekRule> rules) {
+        this.rules = rules;
+    }
 
     @Override
-    protected Money calculate(Money result, final Set<Call> calls) {
+    protected Money calculate(final Money result, final Set<Call> calls) {
+        // rules를 반복문 돌리는데, 미리 쪼개놓은 모든 경우에 대해서, 처리안되는 구간도 있으니
+        // 누적계산되게 해야한다.
         Money sum = Money.ZERO;
         for (final Call call : calls) {
-            //각 call이 가진 interval들에 대해
-            final List<DateTimeInterval> intervals = call.splitByDay();
-            //우리가 가지고 있는 prices를 돌면서
-            for (DayPrice price : prices) {
-                // 각 요일별 요금들은, 내부에서 intervals를 돌리면서, 어떤 요일인지 확인후 요금을 계산해준다.
-                final Money tempResult = price.calculate(intervals);
-                if (tempResult.isLessThanOrEqualTo(Money.ZERO)) {
-                    throw new RuntimeException("calculate error");
+            for (final DateTimeInterval interval : call.splitByDay()) {
+                // 모든 경우의 수 rule을 돌린다.
+                // -> 개별 계산된 값은 해당없을 때 ZERO를 반환하여 누적시킨다.
+                // -> 경우 중에 interval은 1일 단위니, 1개만 걸려서 계산될 것이다.
+                for (final DayOfWeekRule rule : rules) {
+                    final Money tempResult = rule.calculate(interval);
+                    //postcondition
+                    sum = sum.plus(tempResult);
                 }
-
-                sum = sum.plus(tempResult);
             }
         }
-
-        if (sum.isLessThanOrEqualTo(Money.ZERO)) {
-            throw new RuntimeException("calculate error");
-        }
-
         return result.plus(sum);
+
     }
 }

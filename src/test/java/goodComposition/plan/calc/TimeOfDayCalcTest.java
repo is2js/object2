@@ -39,9 +39,7 @@ class TimeOfDayCalcTest {
             // -> base기본요금price/몇초당duration으로 처리되어야한다
             // --> call의 전체구간 vs 내가 요금을 부가한 구간 -> 나의 구간이 구멍날 수 있다.
             new Calculator(
-                new TimeOfDayCalc(Money.of(1000D), Duration.ofSeconds(3600), Arrays.asList(LocalTime.of(10, 0, 0)),
-                    Arrays.asList(LocalTime.of(10, 30, 0)), Arrays.asList(Duration.ofSeconds(60)),
-                    Arrays.asList(Money.of(1000D)))));
+                new TimeOfDayCalc()));
 
         final Money money = plan.calculateFee();
         System.out.println("money = " + money);
@@ -59,11 +57,7 @@ class TimeOfDayCalcTest {
             //시간대별 요금부과하기를
             //10시 ~10시30분은 1분초당, 1000원 -> 30000만원
             //10시30 ~ 11시은 1분초당, 2000원 -> 30000 + 60000만원
-            new Calculator(new TimeOfDayCalc(Money.of(1000D), Duration.ofSeconds(3600),
-                Arrays.asList(LocalTime.of(10, 0, 0), LocalTime.of(10, 30, 0)),
-                Arrays.asList(LocalTime.of(10, 30, 0), LocalTime.of(11, 0, 0)),
-                Arrays.asList(Duration.ofSeconds(60), Duration.ofSeconds(60)),
-                Arrays.asList(Money.of(1000D), Money.of(2000D)))));
+            new Calculator(new TimeOfDayCalc()));
 
         final Money money = plan.calculateFee();
         System.out.println("money = " + money);
@@ -81,11 +75,7 @@ class TimeOfDayCalcTest {
             //시간대별 요금부과하기를
             //11시 ~11시30분은 1분초당, 1000원 -> 겹치는 구간없어서 중간값 0 -> 에러
             //11시30 ~ 12시은 1분초당, 2000원 -> 겹치는 구간 없어서 중간값 0 -> 에러
-            new Calculator(new TimeOfDayCalc(Money.of(1000D), Duration.ofSeconds(3600),
-                Arrays.asList(LocalTime.of(11, 0, 0), LocalTime.of(12, 30, 0)),
-                Arrays.asList(LocalTime.of(11, 30, 0), LocalTime.of(12, 0, 0)),
-                Arrays.asList(Duration.ofSeconds(60), Duration.ofSeconds(60)),
-                Arrays.asList(Money.of(1000D), Money.of(2000D)))));
+            new Calculator(new TimeOfDayCalc()));
 
         final Money money = plan.calculateFee();
         System.out.println("money = " + money);
