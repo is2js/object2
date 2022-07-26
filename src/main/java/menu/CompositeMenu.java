@@ -12,7 +12,7 @@ public class CompositeMenu {
     private String title;
     private LocalDateTime date;
     private boolean available = true;
-    @SerializedName("subMenus")
+    @SerializedName("sub")
     private final Set<CompositeMenu> menus = new HashSet<>();
 
 
