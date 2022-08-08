@@ -18,7 +18,7 @@ public class ConsoleVisitor implements Visitor {
     }
 
     @Override
-    public void end(final int depth) {
+    public void end(final int depth, final boolean isEnd) {
 
     }
 }

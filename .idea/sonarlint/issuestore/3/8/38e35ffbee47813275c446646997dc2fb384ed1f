@@ -1,0 +1,12 @@
+
+x
+java:S1488"[Immediately return this expression instead of assigning it to the temporary variable "sum".(Ó•ƒö8ŸæÅåŸ0
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(²à~
+M
+java:S1172"0Remove this unused method parameter "intervals".(Ç«¥8©æÅåŸ0
+?
+java:S1068")Remove this unused "price" private field.(¢¼•
+B
+java:S1068",Remove this unused "duration" private field.(ğµ®°
+D
+java:S1068".Remove this unused "dayOfWeeks" private field.(ÖÿÄò

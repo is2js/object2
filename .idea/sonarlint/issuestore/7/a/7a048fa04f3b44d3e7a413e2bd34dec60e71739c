@@ -1,0 +1,9 @@
+
+*
+java:S1700"Rename field "menus"(ιένª
+o
+java:S1450"TRemove the "title" field and declare it as a local variable in the relevant methods.(ευςΉύÿÿÿÿ
+`
+java:S1612)">Replace this lambda with method reference 'sortType::compare'.(ΥέΆόÿÿÿÿ8α—Ξ£0
+D
+java:S1068")Remove this unused "title" private field.(ευςΉύÿÿÿÿ

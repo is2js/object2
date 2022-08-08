@@ -1,5 +1,6 @@
 package todo;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class Renderer {
@@ -11,15 +12,20 @@ public class Renderer {
     }
 
     public void render(final TaskReport report){
-        render(factory.get(), report, 0);
-
+        render(factory.get(), report, 0, true);
     }
 
-    private void render(final Visitor visitor, final TaskReport report, final int depth) {
+    private void render(final Visitor visitor,
+                        final TaskReport report,
+                        final int depth,
+                        final boolean isEnd) {
         visitor.drawTask(report.getTask(), depth);
-        for (final TaskReport subReport : report.getList()) {
-            render(visitor, subReport, depth + 1);
+
+        final List<TaskReport> subReports = report.getList();
+        int i = subReports.size();
+        for (final TaskReport subReport : subReports) {
+            render(visitor, subReport, depth + 1, --i == 0);
         }
-        visitor.end(depth);
+        visitor.end(depth, isEnd);
     }
 }

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CompositeTask {
+
     private String title;
 
     private LocalDateTime date;
@@ -16,12 +17,27 @@ public class CompositeTask {
         setDate(date);
     }
 
+    public void removeAll() {
+        // 삭제전 존재검증 -> early return
+        if (list.isEmpty()) {
+            return;
+        }
+        // 자식들 재귀돌면서 삭제
+        for (final CompositeTask subTask : list) {
+            subTask.removeAll();
+        }
+        // 자신의 끝처리로서, list자식들을 완전히 clear()
+        list.clear();
+    }
+
     public void toggle() {
         isComplete = !isComplete;
     }
 
-    public void addTask(final String title, final LocalDateTime date) {
-        list.add(new CompositeTask(title, date));
+    public CompositeTask addTask(final String title, final LocalDateTime date) {
+        final CompositeTask task = new CompositeTask(title, date);
+        list.add(task);
+        return task;
     }
 
     public void remove(final CompositeTask task) {

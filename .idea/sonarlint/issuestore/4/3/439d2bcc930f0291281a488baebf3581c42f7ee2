@@ -1,0 +1,8 @@
+
+H
+java:S1481"-Remove this unused "duration" local variable.(Âà±Îøÿÿÿÿ
+S	java:S106!"9Replace this use of System.out or System.err by a logger.(±ÚÂ˜øÿÿÿÿ
+S	java:S106)"9Replace this use of System.out or System.err by a logger.(ùÿ«ùÿÿÿÿ
+U	java:S1064"9Replace this use of System.out or System.err by a logger.(ä½²á8ˆÍÁ¾ 0
+R
+java:S11449"7Remove this unused private "fromZeroToDuration" method.(ı¤Ùëÿÿÿÿÿ
