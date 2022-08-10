@@ -1,7 +1,5 @@
 package menu;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.time.LocalDateTime;
 
 public class Main {
@@ -28,13 +26,13 @@ public class Main {
 
 //        final MenuRenderer renderer = new MenuRenderer(() -> new ConsoleMenuVisitor());
 //        renderer.render(report);
-//        final MenuRenderer renderer2 = new MenuRenderer(() -> new JsonMenuVisitor());
-//        renderer2.render(report);
+        final MenuRenderer renderer2 = new MenuRenderer(() -> new JsonMenuVisitor());
+        renderer2.render(report);
 
 //        final Gson gson = new Gson();
-        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        final String menuString = gson.toJson(root);
-        System.out.println(menuString);
+//        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        final String menuString = gson.toJson(root);
+//        System.out.println(menuString);
 //        final String reportString = gson.toJson(report);
 //        System.out.println(reportString);
     }

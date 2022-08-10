@@ -4,5 +4,5 @@ public interface MenuVisitor {
 
     void drawMenu(CompositeMenu compositeMenu, int depth);
 
-    void endMenu(int depth);
+    void endMenu(int depth, final boolean isEnd);
 }

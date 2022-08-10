@@ -18,7 +18,7 @@ public class ConsoleMenuVisitor implements MenuVisitor {
     }
 
     @Override
-    public void endMenu(final int depth) {
+    public void endMenu(final int depth, final boolean isEnd) {
 //        System.out.println();
     }
 }

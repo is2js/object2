@@ -76,24 +76,14 @@ W
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 ]
 -src/main/java/menu/CompositeMenuSortType.java,e\1\e10c428bd72f8795301c52c98dd35f7518848e18
-Z
-*src/main/java/menu/ConsoleMenuVisitor.java,1\7\1758ed899b10c1065849bafa601f7fc79d710e84
-W
-'src/main/java/menu/JsonMenuVisitor.java,8\3\838938a9042b7b91f46686c423c95aea9717b86f
-L
-src/main/java/menu/Main.java,0\5\054f72e01f7d6cb32b57169d281f51d0efea72a1
 L
 src/main/java/menu/Menu.java,7\5\7589d2b1de81bc20d0c94604936497141638f2ed
-T
-$src/main/java/menu/MenuRenderer.java,8\c\8cb438eda248c53d581c02ad9aa08d2464fed23a
 R
 "src/main/java/menu/MenuReport.java,9\0\90c2e43a0c96f75e26bc84ef833c27cf6d1ff2bd
 M
 src/main/java/menu/Menus.java,7\a\7a048fa04f3b44d3e7a413e2bd34dec60e71739c
 T
 $src/main/java/menu/MenuSortType.java,0\d\0d11effe72c9b78aed2b1ab3cd61bf4768dff32a
-S
-#src/main/java/menu/MenuVisitor.java,8\8\88f4d8e0d3ca6ef41fb705ee086af6edcb9210f3
 P
  src/main/java/todo/SortType.java,6\8\681ecfe8444723a3d9356981aa6b430f176e4c12
 L
@@ -102,18 +92,12 @@ Z
 *src/main/java/todo/TaskReportSortType.java,4\1\413054b95da7079d19b670bfd2569224e5965386
 M
 src/main/java/todo/Tasks.java,3\4\343dc6d408b30ddb1ca940ae1218c455dfc321c5
-U
-%src/main/java/menu/CompositeMenu.java,8\f\8fca8419717e1b6364b23fc782cab6a2bfc7375c
 f
 6src/test/java/goodComposition/plan/CalculatorTest.java,7\a\7ad8182ef1e971ed5e18c1dbba4526ba8127f9f0
 R
 "src/main/java/todo/TaskReport.java,2\8\2882ec02868a0d0937f46fb50a5d0d602d39f220
 u
 Esrc/main/java/practice_next_deco_for_adding_cumulative_func/Main.java,d\4\d4cac9d53f21883e909d505b0a2aece9a63b35f6
-r
-Bsrc/main/java/practice_prev_deco_for_section/SectionPriceRule.java,6\2\62f66db0bd461aa41e474ae515e6597b5432fe0d
-r
-Bsrc/main/java/practice_prev_deco_for_section/SectionPriceCalc.java,1\b\1b7f52a668d51c0e5d1a42c5527e5962f8ac9c2e
 {
 Ksrc/main/java/practice_next_deco_for_adding_cumulative_func/Calculator.java,7\e\7e32cd33c81e5a359aebfd9ea27f7eab89855f0e
 y

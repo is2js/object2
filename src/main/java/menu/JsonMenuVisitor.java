@@ -21,11 +21,14 @@ public class JsonMenuVisitor implements MenuVisitor {
     }
 
     @Override
-    public void endMenu(final int depth) {
+    public void endMenu(final int depth, final boolean isEnd) {
         final String padding = toPadding(depth);
         // 자식들 시작시 열어주는 대괄호
         System.out.println(padding + "  ]");
         // 내 시작시 열어주는 괄호
-        System.out.println(padding + "},");
+        System.out.println(padding + "}");
+        if (!isEnd) {
+            System.out.println(",");
+        }
     }
 }
