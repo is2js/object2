@@ -78,8 +78,6 @@ W
 -src/main/java/menu/CompositeMenuSortType.java,e\1\e10c428bd72f8795301c52c98dd35f7518848e18
 L
 src/main/java/menu/Menu.java,7\5\7589d2b1de81bc20d0c94604936497141638f2ed
-R
-"src/main/java/menu/MenuReport.java,9\0\90c2e43a0c96f75e26bc84ef833c27cf6d1ff2bd
 M
 src/main/java/menu/Menus.java,7\a\7a048fa04f3b44d3e7a413e2bd34dec60e71739c
 T

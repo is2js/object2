@@ -17,24 +17,34 @@ public class CompositeMenu {
 
 
     public CompositeMenu(final String title, final LocalDateTime date) {
-        setTitle(title);
-        setDate(date);
+        this(title, date, true);
     }
 
-    public boolean addMenu(final String title, final LocalDateTime date) {
+    public CompositeMenu(final String title, final LocalDateTime date, final boolean available) {
+        setTitle(title);
+        setDate(date);
+        setAvailable(available);
+    }
+
+
+    public CompositeMenu addMenu(final String title, final LocalDateTime date) {
         return addMenu(new CompositeMenu(title, date));
     }
 
-    public boolean addMenu(final CompositeMenu compositeMenu) {
+    public CompositeMenu addMenu(final String title, final LocalDateTime date, final boolean available) {
+        return addMenu(new CompositeMenu(title, date, available));
+    }
+
+    public CompositeMenu addMenu(final CompositeMenu compositeMenu) {
         if (menus.contains(compositeMenu)) {
-            return false;
+            throw new IllegalArgumentException("already exist");
         }
         menus.add(compositeMenu);
-        return true;
+        return compositeMenu;
     }
 
     public boolean remove(final CompositeMenu menu) {
-        if (menus.contains(menu)) {
+        if (!menus.contains(menu)) {
             return false;
         }
         menus.remove(menu);
@@ -51,12 +61,27 @@ public class CompositeMenu {
         // 내 자식들을 순회전에 변환 + 전환까지
         final List<CompositeMenu> copiedMenus = new ArrayList<>(menus);
         copiedMenus.sort((a, b) -> compositeMenuSortType.compare(a, b));
-        
+
         for (final CompositeMenu menu : copiedMenus) {
             menuReport.addReport(menu.createReport(compositeMenuSortType));
         }
 
         return menuReport;
+    }
+
+    public void removeAll() {
+        if (menus.isEmpty()) {
+            return;
+        }
+        // 자신의 삭제처리 -> setter로 대체
+
+        // 자식들의 삭제처리 -> 동적트리순회
+        for (final CompositeMenu subMenu : menus) {
+            subMenu.removeAll();
+        }
+
+        // [자식들을 다 돌고] -> [자신의 끝처리]로서, [실제 현재 자식들의 삭제처리]
+        menus.clear();
     }
 
     public String getTitle() {
@@ -77,6 +102,10 @@ public class CompositeMenu {
 
     public void setDate(final LocalDateTime date) {
         this.date = date;
+    }
+
+    public void setAvailable(final boolean available) {
+        this.available = available;
     }
 
     public void toggle() {

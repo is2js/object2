@@ -1,5 +1,0 @@
-
-2
-java:S1643	"Use a StringBuilder instead.(¯üä¼
-N	java:S106"9Replace this use of System.out or System.err by a logger.(À¶ñ
-]	java:S125"<This block of commented-out lines of code should be removed.(—Ûóäûÿÿÿÿ8ÑÂÆË£0

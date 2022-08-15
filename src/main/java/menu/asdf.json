@@ -1,0 +1,64 @@
+{
+  title: "메뉴",
+  date: "2022-08-12T16:25:35.948575700",
+  available: "true",
+  sub: [
+    {
+      title: "의료진 소개",
+      date: "2022-08-12T16:25:35.945574500",
+      available: "true",
+      sub: [
+        {
+          title: "대표원장",
+          date: "2022-08-12T16:25:35.947572600",
+          available: "true",
+          sub: []
+        },
+        {
+          title: "부원장",
+          date: "2022-08-12T16:25:35.948575700",
+          available: "true",
+          sub: []
+        }
+      ]
+    },
+    {
+      title: "한의원 소개",
+      date: "2022-08-12T16:25:35.948575700",
+      available: "true",
+      sub: [
+        {
+          title: "오시는 길",
+          date: "2022-08-12T16:25:35.948575700",
+          available: "true",
+          sub: []
+        },
+        {
+          title: "한의원 내부",
+          date: "2022-08-12T16:25:35.948575700",
+          available: "true",
+          sub: []
+        }
+      ]
+    },
+    {
+      title: "게시판",
+      date: "2022-08-12T16:25:35.948575700",
+      available: "true",
+      sub: [
+        {
+          title: "상담게시판",
+          date: "2022-08-12T16:25:35.948575700",
+          available: "true",
+          sub: []
+        },
+        {
+          title: "치료후기",
+          date: "2022-08-12T16:25:35.948575700",
+          available: "true",
+          sub: []
+        }
+      ]
+    }
+  ]
+}

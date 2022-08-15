@@ -24,7 +24,6 @@ public class MenuRenderer {
 
         // (필요시) 자식들 순회 전 정렬
         // 자식들 순회하며 재귀호출
-
         final List<MenuReport> subReports = report.getReports();
         int i = subReports.size();
         for (final MenuReport subReport : subReports) {
